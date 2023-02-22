@@ -1,27 +1,82 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import login from "@/views/user/Login";
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    {
+        path: "/",
+        name: "home",
+        component: login
+    },
+    {
+        path: '/home-view',
+        component: () => import('@/components/home/HomeView'),
+        redirect: 'v1/u_list',
+        children: [
+            {
+                path: '/frame',
+                name: 'frame',
+                component: () => import('../views/user/Frame.vue')
+            },
+            {
+                path: '/u_View',
+                name: 'userView',
+                component: () => import('../views/user/UserView.vue')
+            },
+            {
+                path: '/u_list',
+                name: 'userList',
+                component: () => import('../views/user/UserList.vue')
+            },
+            {
+                path: '/u_add',
+                name: 'userAad',
+                component: () => import('../views/user/UserAdd.vue')
+            },
+            {
+                path: '/b_list',
+                name: 'billList',
+                component: () => import('../views/bill/BillList.vue')
+            },
+            {
+                path: '/b_add',
+                name: 'billAdd',
+                props: true,
+                component: () => import('../views/bill/BillAdd.vue')
+            },
+            {
+                path: '/b_view',
+                name: 'billView',
+                props: true,
+                component: () => import('../views/bill/BillView.vue')
+            },
+            {
+                path: '/b_update',
+                name: 'billUpdate',
+                props: true,
+                component: () => import('../views/bill/BillUpdate.vue')
+            },
+            {
+                path: '/p_list',
+                name: 'ProviderList',
+                component: () => import('../views/provider/ProviderList.vue')
+            },
+            {
+                path: '/p_update',
+                name: 'PasswordUpdate',
+                component: () => import('../views/password/PasswordUpdate.vue')
+            }
+        ]
+    }, {
+        path: '*',
+        redirect: "/frame"
+    },
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router
