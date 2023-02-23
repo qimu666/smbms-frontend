@@ -5,37 +5,104 @@
       <span>密码修改页面</span>
     </div>
     <div class="providerAdd">
-      <form id="userForm" name="userForm" method="post" action="/user/user.do">
-        <input type="hidden" name="method" value="savepwd">
-        <!--div的class 为error是验证错误，ok是验证成功-->
-        <div class="info">${message}</div>
-        <div class="">
-          <label for="oldPassword">旧密码：</label>
-          <input type="password" name="oldpassword" id="oldpassword" value="">
-          <font color="red"></font>
-        </div>
-        <div>
-          <label for="newPassword">新密码：</label>
-          <input type="password" name="newpassword" id="newpassword" value="">
-          <font color="red"></font>
-        </div>
-        <div>
-          <label for="reNewPassword">确认新密码：</label>
-          <input type="password" name="rnewpassword" id="rnewpassword" value="">
-          <font color="red"></font>
-        </div>
-        <div class="providerAddBtn">
-          <!--<a href="#">保存</a>-->
-          <input type="button" name="save" id="save" value="保存" class="input-button">
-        </div>
-      </form>
+      <div class="">
+        <label for="oldPassword">旧密码：</label>
+        <input type="password" v-model="password.oldPassword">
+      </div>
+      <div>
+        <label for="newPassword">新密码：</label>
+        <input type="password" v-model="password.newPassword">
+      </div>
+      <div>
+        <label for="reNewPassword">确认新密码：</label>
+        <input type="password" v-model="password.reNewPassword" @blur="inputCheck">
+      </div>
+      <div class="providerAddBtn">
+        <input type="button" @click="updatePassword" value="保存" class="input-button">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import {Message} from "element-ui";
+import request from "@/assets/serves/request/API";
+
 export default {
-  name: "PasswordUpdate"
+  name: "PasswordUpdate",
+  data() {
+    return {
+      password: {
+        oldPassword: '',
+        newPassword: '',
+        reNewPassword: ''
+      }
+    }
+  }, methods: {
+    inputCheck() {
+      if (this.password.newPassword !== this.password.reNewPassword) {
+        Message({
+          type: "error",
+          duration: 1500,
+          center: true,
+          message: "要修改的密码不一致"
+        })
+        return false
+      }
+    }, updatePassword() {
+      const reNewPassword = this.password.reNewPassword.trim().length === 0 || this.password.reNewPassword === ''
+      const newPassword = this.password.newPassword.trim().length === 0 || this.password.newPassword === ''
+      const oldPassword = this.password.oldPassword.trim().length === 0 || this.password.oldPassword === ''
+      if (reNewPassword || newPassword || oldPassword) {
+        Message({
+          type: "error",
+          duration: 1500,
+          center: true,
+          message: "信息不能为空"
+        })
+        return false
+      }
+      if (this.password.newPassword !== this.password.reNewPassword) {
+        Message({
+          type: "error",
+          duration: 1500,
+          center: true,
+          message: "要修改的密码不一致"
+        })
+        return false
+      }
+      this.$confirm('请确认修改密码?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        request.put("/api/user/updatePassword", this.password).then(res => {
+          if (res.code === 0) {
+            Message({
+              type: "success",
+              duration: 1500,
+              center: true,
+              message: "修改成功"
+            })
+          } else {
+            Message({
+              type: "error",
+              duration: 1500,
+              center: true,
+              message: res.description
+            })
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          center: true,
+          duration: 1500,
+          message: '已取消删除'
+        });
+      })
+    }
+  },
 }
 </script>
 

@@ -44,14 +44,11 @@
   </div>
 </template>
 <script>
-import {mapState} from "vuex";
 import router from "@/router";
 import request from "@/assets/serves/request/API";
-
 export default {
   name: "HomeView",
   computed: {
-    ...mapState(['userName']),
     formattedTine() {
       return this.currentTime.toLocaleString()
     }
@@ -62,31 +59,43 @@ export default {
         cancelButtonText: '取消',
         type: 'error'
       }).then(() => {
-        request.get("/user/logout")
-        this.$message({
-          type: 'error',
-          message: '退出成功!',
-          duration: 2000
-        });
+        request.get("/api/user/logout")
+        if (!router.currentRoute.path.includes(router.currentRoute.path)) {
+          this.$message({
+            type: 'error',
+            center: true,
+            message: '退出成功!',
+            duration: 2000
+          });
+        }
         sessionStorage.clear()
-        router.push("/")
+        router.replace("/")
       }).catch(() => {
         this.$message({
+          center: true,
+          duration: 1500,
           type: 'info',
           message: '已取消'
         });
       });
     }, current() {
-      request.post('/user/current').then(res => {
+      request.post('/api/user/current').then(res => {
         const {data} = res
-        this.$store.commit('updateName', data.userName);
+        sessionStorage.setItem("loginUser", JSON.stringify(data))
       })
     },
     toFrame() {
       router.push("/frame")
+    }, getLoginUser() {
+      let loginUser = sessionStorage.getItem("loginUser");
+      loginUser = JSON.parse(loginUser)
+      if (loginUser){
+        this.userName = loginUser.userName
+      }
     }
   },
   mounted() {
+    this.getLoginUser()
     setInterval(() => {
       this.currentTime = new Date();
     }, 1000);
@@ -96,6 +105,7 @@ export default {
   },
   data() {
     return {
+      userName: '',
       currentTime: ""
     }
   }

@@ -21,7 +21,7 @@ export function updateBill(row) {
 
 
 export async function getBill(id) {
-    return await request.get(`bill/${id}`)
+    return await request.get(`/api/bill/${id}`)
 }
 
 export function goBillList() {

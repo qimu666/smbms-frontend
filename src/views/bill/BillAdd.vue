@@ -76,7 +76,7 @@ export default {
       if (proList) {
         this.providerList = JSON.parse(proList)
       } else {
-        request.get("/provider/list").then(data => {
+        request.get("/api/provider/list").then(data => {
           this.providerList = data.data.providerList
         })
       }
@@ -88,16 +88,20 @@ export default {
         cancelButtonText: '放弃添加',
         type: 'warning'
       }).then(() => {
-        request.post("/bill/save", this.bill).then(res => {
+        request.post("/api/bill/save", this.bill).then(res => {
           if (res.code === 0) {
             this.$message({
               type: 'success',
+              center: true,
+              duration:1500,
               message: '添加成功!'
             });
             goBillList()
           } else {
             this.$message({
               type: 'error',
+              center: true,
+              duration:1500,
               message: res.description
             });
           }
@@ -105,6 +109,8 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
+          center: true,
+          duration:1500,
           message: '已取消操作!'
         });
       })

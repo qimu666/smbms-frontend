@@ -84,7 +84,7 @@ export default {
     }
   }, methods: {
     getBillList() {
-      request.post('/bill/bills', this.queryDate
+      request.post('/api/bill/bills', this.queryDate
       ).then(res => {
         this.bill = res.data.billList
         this.total = res.data.total
@@ -105,15 +105,17 @@ export default {
     }, updateBill(row) {
       updateBill(row)
     }, billDelete(row) {
-      this.$confirm('此操作将永久删除该订单, 是否继续?', '警告', {
+      this.$confirm('请确认是否删除该订单?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'error'
       }).then(() => {
-        request.delete(`/bill/${row.id}`).then(res => {
+        request.delete(`/api/bill/${row.id}`).then(res => {
           if (res.code === 0) {
             this.$message({
               type: 'success',
+              center: true,
+              duration:1500,
               message: '删除成功!'
             });
           }
@@ -122,6 +124,8 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
+          center: true,
+          duration:1500,
           message: '已取消删除'
         });
       })

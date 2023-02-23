@@ -82,7 +82,7 @@ export default {
       if (proList) {
         this.providerList = JSON.parse(proList)
       } else {
-        request.get("/provider/list").then(data => {
+        request.get("/api/provider/list").then(data => {
           this.providerList = data.data.providerList
         })
       }
@@ -97,10 +97,12 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        request.put("/bill/save", this.bill).then(res => {
+        request.put("/api/bill/save", this.bill).then(res => {
           if (res.code === 0) {
             this.$message({
+              center: true,
               type: 'success',
+              duration:1500,
               message: '修改成功!'
             });
             goBillList()
@@ -108,7 +110,9 @@ export default {
         })
       }).catch(() => {
         this.$message({
+          center: true,
           type: 'info',
+          duration:1500,
           message: '取消成功!'
         });
       })

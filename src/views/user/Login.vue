@@ -9,13 +9,13 @@
           <span class="info" id="info"></span>
           <div class="inputbox">
             <label for="userCode">用户名：</label>
-            <input type="text" class="input-text" id="userCode" v-model="querData.userCode" name="userCode"
+            <input type="text" class="input-text" id="userCode" v-model="queryData.userCode" name="userCode"
                    placeholder="请输入用户名"
                    required/>
           </div>
           <div class="inputbox">
             <label for="userPassword">密码：</label>
-            <input type="password" id="userPassword" v-model="querData.userPassword" name="userPassword"
+            <input type="password" id="userPassword" v-model="queryData.userPassword" name="userPassword"
                    placeholder="请输入密码" required/>
           </div>
           <div class="subBtn">
@@ -30,27 +30,48 @@
 <script>
 import router from "@/router";
 import request from "@/assets/serves/request/API";
+import {Message} from "element-ui";
 
 export default {
   name: "userLogin",
   data() {
     return {
-      querData: {
+      queryData: {
         userCode: "",
         userPassword: ''
       }
     }
   },
+  mounted() {
+    this.getLoginUser()
+  },
   methods: {
     login() {
-      request.post("/user/login", this.querData).then(response => {
-        const {description, code} = response
+      request.post("/api/user/login", this.queryData).then(response => {
+        const {data, description, code} = response
         if (code === 0) {
+          sessionStorage.setItem("loginUser", JSON.stringify(data))
           router.push("/frame")
         } else {
-          alert(description)
+          Message({
+            type: "error",
+            duration: 1500,
+            center: true,
+            message: description
+          })
         }
       })
+    },
+    getLoginUser() {
+      const userLogin = JSON.parse(sessionStorage.getItem("loginUser"))
+      if (!userLogin) {
+        Message({
+          type: "error",
+          duration: 1500,
+          center: true,
+          message: "请先登录(>_<)!"
+        })
+      }
     }
   }
 }
