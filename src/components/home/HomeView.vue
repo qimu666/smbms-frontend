@@ -46,6 +46,7 @@
 <script>
 import router from "@/router";
 import request from "@/assets/serves/request/API";
+
 export default {
   name: "HomeView",
   computed: {
@@ -79,7 +80,7 @@ export default {
         });
       });
     }, current() {
-      request.post('/api/user/current').then(res => {
+      request.post(`/api/user/current`).then(res => {
         const {data} = res
         sessionStorage.setItem("loginUser", JSON.stringify(data))
       })
@@ -89,7 +90,7 @@ export default {
     }, getLoginUser() {
       let loginUser = sessionStorage.getItem("loginUser");
       loginUser = JSON.parse(loginUser)
-      if (loginUser){
+      if (loginUser) {
         this.userName = loginUser.userName
       }
     }

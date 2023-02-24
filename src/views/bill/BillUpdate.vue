@@ -5,39 +5,37 @@
       <span>订单管理页面 >> 订单添加页面</span>
     </div>
     <div class="providerAdd">
-
-      <!--div的class 为error是验证错误，ok是验证成功-->
-      <div class="">
+      <div>
         <label for="billCode">订单编码：</label>
-        <input type="text" name="billCode" id="billCode" v-model="bill.billCode" readonly="readonly">
+        <input type="text" v-model="bill.billCode">
       </div>
       <div>
         <label for="productName">商品名称：</label>
-        <input type="text" name="productName" id="productName" v-model="bill.productName">
-        <font color="red"></font>
+        <input type="text" v-model="bill.productName">
+
       </div>
       <div>
         <label for="productUnit">商品单位：</label>
-        <input type="text" name="productUnit" id="productUnit" v-model="bill.productUnit">
-        <font color="red"></font>
+        <input type="text" v-model="bill.productUnit">
+
       </div>
       <div>
         <label for="productCount">商品数量：</label>
-        <input type="text" name="productCount" id="productCount" v-model="bill.productCount">
-        <font color="red"></font>
+        <input type="text" v-model="bill.productCount">
+
       </div>
       <div>
         <label for="totalPrice">总金额：</label>
-        <input type="text" name="totalPrice" id="totalPrice" v-model="bill.totalPrice">
-        <font color="red"></font>
+        <input type="text" v-model="bill.totalPrice">
+
       </div>
       <div>
         <label for="providerId">供应商：</label>
-        <select name="providerId" v-model="bill.providerId" id="providerId">
+        <select v-model="bill.providerId" id="providerId">
           <option value="0">--请选择--</option>
           <option v-for="item of providerList" :key="item.id" :value="item.id">{{ item.proName }}</option>
         </select>
-        <font color="red"></font>
+
       </div>
       <div>
         <label>是否付款：</label>
@@ -93,8 +91,8 @@ export default {
       goBillList()
     }, async updateBill() {
       this.$confirm('请确认是否继续修改订单信息!', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: '确定修改',
+        cancelButtonText: '取消修改',
         type: 'warning'
       }).then(() => {
         request.put("/api/bill/save", this.bill).then(res => {
@@ -106,6 +104,13 @@ export default {
               message: '修改成功!'
             });
             goBillList()
+          }else {
+            this.$message({
+              center: true,
+              type: 'error',
+              duration:1500,
+              message:res.description
+            });
           }
         })
       }).catch(() => {

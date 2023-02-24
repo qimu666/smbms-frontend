@@ -47,7 +47,6 @@ export default {
           center: true,
           message: "要修改的密码不一致"
         })
-        return false
       }
     }, updatePassword() {
       const reNewPassword = this.password.reNewPassword.trim().length === 0 || this.password.reNewPassword === ''
@@ -72,8 +71,8 @@ export default {
         return false
       }
       this.$confirm('请确认修改密码?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: '确定修改',
+        cancelButtonText: '取消修改',
         type: 'warning'
       }).then(() => {
         request.put("/api/user/updatePassword", this.password).then(res => {
@@ -98,7 +97,7 @@ export default {
           type: 'info',
           center: true,
           duration: 1500,
-          message: '已取消删除'
+          message: '已取消操作'
         });
       })
     }

@@ -30,7 +30,7 @@ export default function fn() {
             week = "六";
             break;
     }
-    return  year + "年" + totwo(mon) + "月" + totwo(day) + "日" + "&nbsp;" + totwo(h) + ":" + totwo(m) + ":" + totwo(s) + "&nbsp;" + "星期" + week;
+    return year + "年" + totwo(mon) + "月" + totwo(day) + "日" + "&nbsp;" + totwo(h) + ":" + totwo(m) + ":" + totwo(s) + "&nbsp;" + "星期" + week;
 }
 
 
@@ -40,4 +40,10 @@ function totwo(n) {
     } else {
         return n = "" + n;
     }
+}
+
+
+export const genderEnum = {
+    1: '男',
+    2: '女'
 }

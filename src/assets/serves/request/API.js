@@ -10,7 +10,7 @@ const NO_LOGIN_CHECK = ['/']
 request.interceptors.request.use(
     (config) => {
         // 获取当前路由path
-        console.log(router.currentRoute.path)
+        // console.log(router.currentRoute.path)
         let loginUser = sessionStorage.getItem("loginUser");
         loginUser = JSON.parse(loginUser)
         if (!loginUser) {

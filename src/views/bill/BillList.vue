@@ -5,23 +5,21 @@
       <span>订单管理页面</span>
     </div>
     <div class="search">
-      <form id="billSearch">
-        <span>商品名称：</span>
-        <input name="productName" type="text" v-model="queryDate.productName" id="productName">
-        <span>供应商：</span>
-        <select name="providerId" v-model="queryDate.providerId" id="providerId">
-          <option value="0">--请选择--</option>
-          <option v-for="item of providerList" :key="item.id" :value="item.id">{{ item.proName }}</option>
-        </select>
-        <span>是否付款：</span>
-        <select name="isPayment" v-model="queryDate.isPayment" id="isPayment">
-          <option value="0">--请选择--</option>
-          <option value="1">--未支付--</option>
-          <option value="2">--已支付--</option>
-        </select>
-        <input value="查 询" type="submit" @click.prevent="getBillList" id="searchbutton">
-        <router-link to="/b_add">添加订单</router-link>
-      </form>
+      <span>商品名称：</span>
+      <input name="productName" type="text" @keyup.enter="getBillList" @input="getBillList" v-model="queryDate.productName" id="productName">
+      <span>供应商：</span>
+      <select name="providerId" v-model="queryDate.providerId" id="providerId">
+        <option value="0">--请选择--</option>
+        <option v-for="item of providerList" :key="item.id" :value="item.id">{{ item.proName }}</option>
+      </select>
+      <span>是否付款：</span>
+      <select name="isPayment" v-model="queryDate.isPayment" id="isPayment">
+        <option value="0">--请选择--</option>
+        <option value="1">--未支付--</option>
+        <option value="2">--已支付--</option>
+      </select>
+      <input value="查 询" type="submit" @click.prevent="getBillList" id="searchbutton">
+      <router-link to="/b_add">添加订单</router-link>
     </div>
     <el-table
         :data="bill"
@@ -48,7 +46,6 @@
             <img src="@/assets/images/schu.png" alt="删除" title="删除"/>
           </a>
         </template>
-
       </el-table-column>
     </el-table>
     <el-pagination
@@ -106,8 +103,8 @@ export default {
       updateBill(row)
     }, billDelete(row) {
       this.$confirm('请确认是否删除该订单?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: '确定删除',
+        cancelButtonText: '取消删除',
         type: 'error'
       }).then(() => {
         request.delete(`/api/bill/${row.id}`).then(res => {
@@ -115,7 +112,7 @@ export default {
             this.$message({
               type: 'success',
               center: true,
-              duration:1500,
+              duration: 1500,
               message: '删除成功!'
             });
           }
@@ -125,8 +122,8 @@ export default {
         this.$message({
           type: 'info',
           center: true,
-          duration:1500,
-          message: '已取消删除'
+          duration: 1500,
+          message: '已取消操作'
         });
       })
     }

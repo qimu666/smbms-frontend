@@ -5,46 +5,44 @@
       <span>订单管理页面 >> 订单添加页面</span>
     </div>
     <div class="providerAdd">
-      <form id="billForm">
-        <div>
-          <label for="billCode">订单编码：</label>
-          <input type="text" v-model="bill.billCode">
-        </div>
-        <div>
-          <label for="productName">商品名称：</label>
-          <input type="text" v-model="bill.productName">
-        </div>
-        <div>
-          <label for="productUnit">商品单位：</label>
-          <input type="text" v-model="bill.productUnit">
-        </div>
-        <div>
-          <label for="productCount">商品数量：</label>
-          <input type="text" v-model="bill.productCount">
-        </div>
-        <div>
-          <label for="totalPrice">总金额：</label>
-          <input type="text" v-model="bill.totalPrice">
-        </div>
-        <div>
-          <label>供应商：</label>
-          <select name="providerId" v-model="bill.providerId">
-            <option value="0">--请选择--</option>
-            <option :value="item.id" v-for="item of providerList" :key="item.id">{{ item.proName }}</option>
-          </select>
-        </div>
-        <div>
-          <label>是否付款：</label>
-          <el-radio-group v-model="bill.isPayment">
-            <el-radio :label="1">未支付</el-radio>
-            <el-radio :label="2">已支付</el-radio>
-          </el-radio-group>
-        </div>
-        <div class="providerAddBtn">
-          <input type="button" @click.prevent="addBill" value="保存">
-          <input type="button" @click.prevent="goBillList" value="返回">
-        </div>
-      </form>
+      <div>
+        <label for="billCode">订单编码：</label>
+        <input type="text" v-model="bill.billCode">
+      </div>
+      <div>
+        <label for="productName">商品名称：</label>
+        <input type="text" v-model="bill.productName">
+      </div>
+      <div>
+        <label for="productUnit">商品单位：</label>
+        <input type="text" v-model="bill.productUnit">
+      </div>
+      <div>
+        <label for="productCount">商品数量：</label>
+        <input type="text" v-model="bill.productCount">
+      </div>
+      <div>
+        <label for="totalPrice">总金额：</label>
+        <input type="text" v-model="bill.totalPrice">
+      </div>
+      <div>
+        <label>供应商：</label>
+        <select name="providerId" v-model="bill.providerId">
+          <option value="0">--请选择--</option>
+          <option :value="item.id" v-for="item of providerList" :key="item.id">{{ item.proName }}</option>
+        </select>
+      </div>
+      <div>
+        <label>是否付款：</label>
+        <el-radio-group v-model="bill.isPayment">
+          <el-radio :label="1">未支付</el-radio>
+          <el-radio :label="2">已支付</el-radio>
+        </el-radio-group>
+      </div>
+      <div class="providerAddBtn">
+        <input type="button" @click.prevent="addBill" value="保存">
+        <input type="button" @click.prevent="goBillList" value="返回">
+      </div>
     </div>
   </div>
 </template>
@@ -72,9 +70,9 @@ export default {
     }
   }, methods: {
     getProList() {
-      const proList = sessionStorage.getItem("providerList");
+      const proList = JSON.parse(sessionStorage.getItem("providerList"));
       if (proList) {
-        this.providerList = JSON.parse(proList)
+        this.providerList = proList
       } else {
         request.get("/api/provider/list").then(data => {
           this.providerList = data.data.providerList
@@ -93,7 +91,7 @@ export default {
             this.$message({
               type: 'success',
               center: true,
-              duration:1500,
+              duration: 1500,
               message: '添加成功!'
             });
             goBillList()
@@ -101,7 +99,7 @@ export default {
             this.$message({
               type: 'error',
               center: true,
-              duration:1500,
+              duration: 1500,
               message: res.description
             });
           }
@@ -110,7 +108,7 @@ export default {
         this.$message({
           type: 'info',
           center: true,
-          duration:1500,
+          duration: 1500,
           message: '已取消操作!'
         });
       })
@@ -118,7 +116,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

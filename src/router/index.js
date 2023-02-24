@@ -18,12 +18,19 @@ const routes = [
             {
                 path: '/frame',
                 name: 'frame',
-                component: () => import('../views/user/Frame.vue')
+                component: () => import('../views/Frame.vue')
             },
             {
                 path: '/u_View',
                 name: 'userView',
+                props: true,
                 component: () => import('../views/user/UserView.vue')
+            },
+            {
+                path: '/u_update',
+                name: 'userUpdate',
+                props: true,
+                component: () => import('../views/user/UserUpdate')
             },
             {
                 path: '/u_list',
