@@ -50,7 +50,6 @@ const routes = [
             {
                 path: '/b_add',
                 name: 'billAdd',
-                props: true,
                 component: () => import('../views/bill/BillAdd.vue')
             },
             {
@@ -67,11 +66,28 @@ const routes = [
             },
             {
                 path: '/p_list',
-                name: 'ProviderList',
+                name: 'providerList',
                 component: () => import('../views/provider/ProviderList.vue')
             },
             {
+                path: '/p_add',
+                name: 'providerAdd',
+                component: () => import('../views/provider/ProviderAdd.vue')
+            },
+            {
+                path: '/p_view',
+                name: 'providerView',
+                props: true,
+                component: () => import('../views/provider/ProviderView.vue')
+            },
+            {
                 path: '/p_update',
+                name: 'providerUpdate',
+                props: true,
+                component: () => import('../views/provider/ProviderUpdate.vue')
+            },
+            {
+                path: '/pin_update',
                 name: 'PasswordUpdate',
                 component: () => import('../views/password/PasswordUpdate.vue')
             }

@@ -2,7 +2,7 @@
   <div class="right">
     <div class="location">
       <strong>你现在所在的位置是:</strong>
-      <span>订单管理页面 >> 信息查看</span>
+      <span>订单管理页面 >> 订单信息查看页面</span>
     </div>
     <div class="providerView">
       <p><strong>订单编号：</strong><span>{{ bill.billCode }}</span></p>

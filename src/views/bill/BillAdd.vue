@@ -10,24 +10,24 @@
         <input type="text" v-model="bill.billCode">
       </div>
       <div>
-        <label for="productName">商品名称：</label>
+        <label>商品名称：</label>
         <input type="text" v-model="bill.productName">
       </div>
       <div>
-        <label for="productUnit">商品单位：</label>
+        <label>商品单位：</label>
         <input type="text" v-model="bill.productUnit">
       </div>
       <div>
-        <label for="productCount">商品数量：</label>
+        <label>商品数量：</label>
         <input type="text" v-model="bill.productCount">
       </div>
       <div>
-        <label for="totalPrice">总金额：</label>
+        <label>总金额：</label>
         <input type="text" v-model="bill.totalPrice">
       </div>
       <div>
         <label>供应商：</label>
-        <select name="providerId" v-model="bill.providerId">
+        <select  v-model="bill.providerId">
           <option value="0">--请选择--</option>
           <option :value="item.id" v-for="item of providerList" :key="item.id">{{ item.proName }}</option>
         </select>

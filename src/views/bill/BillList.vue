@@ -6,14 +6,14 @@
     </div>
     <div class="search">
       <span>商品名称：</span>
-      <input name="productName" type="text" @keyup.enter="getBillList" @input="getBillList" v-model="queryDate.productName" id="productName">
+      <input type="text" @keyup.enter="getBillList" @input="getBillList" v-model="queryDate.productName">
       <span>供应商：</span>
-      <select name="providerId" v-model="queryDate.providerId" id="providerId">
+      <select  v-model="queryDate.providerId" id="providerId">
         <option value="0">--请选择--</option>
         <option v-for="item of providerList" :key="item.id" :value="item.id">{{ item.proName }}</option>
       </select>
       <span>是否付款：</span>
-      <select name="isPayment" v-model="queryDate.isPayment" id="isPayment">
+      <select v-model="queryDate.isPayment">
         <option value="0">--请选择--</option>
         <option value="1">--未支付--</option>
         <option value="2">--已支付--</option>

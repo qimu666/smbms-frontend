@@ -47,3 +47,5 @@ export const genderEnum = {
     1: '男',
     2: '女'
 }
+
+export const NO_LOGIN_CHECK = ['/']

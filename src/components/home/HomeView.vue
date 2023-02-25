@@ -26,7 +26,7 @@
               <router-link to="/u_list">用户管理</router-link>
             </li>
             <li>
-              <router-link to="/p_update">密码修改</router-link>
+              <router-link to="/pin_update">密码修改</router-link>
             </li>
             <li>
               <a @click.prevent="logout">退出系统</a>
@@ -104,7 +104,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

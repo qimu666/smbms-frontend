@@ -2,7 +2,7 @@
   <div class="right">
     <div class="location">
       <strong>你现在所在的位置是:</strong>
-      <span>订单管理页面 >> 订单添加页面</span>
+      <span>订单管理页面 >> 订单修改页面</span>
     </div>
     <div class="providerAdd">
       <div>
@@ -10,22 +10,22 @@
         <input type="text" v-model="bill.billCode">
       </div>
       <div>
-        <label for="productName">商品名称：</label>
+        <label>商品名称：</label>
         <input type="text" v-model="bill.productName">
 
       </div>
       <div>
-        <label for="productUnit">商品单位：</label>
+        <label>商品单位：</label>
         <input type="text" v-model="bill.productUnit">
 
       </div>
       <div>
-        <label for="productCount">商品数量：</label>
+        <label>商品数量：</label>
         <input type="text" v-model="bill.productCount">
 
       </div>
       <div>
-        <label for="totalPrice">总金额：</label>
+        <label>总金额：</label>
         <input type="text" v-model="bill.totalPrice">
 
       </div>

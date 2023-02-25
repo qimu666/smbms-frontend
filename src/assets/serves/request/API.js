@@ -4,8 +4,8 @@ import axios from "axios";
 const request = axios.create(config);
 import {Message} from "element-ui";
 import router from "@/router";
+import {NO_LOGIN_CHECK} from "@/assets/js/common/common";
 // 请求检验白名单
-const NO_LOGIN_CHECK = ['/']
 
 request.interceptors.request.use(
     (config) => {
@@ -20,6 +20,7 @@ request.interceptors.request.use(
                     type: 'error',
                     center: true,
                     duration: 1500,
+                    offset:20,
                     message: "登录过期,请重新登录(>_<)!"
                 })
                 router.replace("/").catch(e => console.log(e))

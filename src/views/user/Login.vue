@@ -65,12 +65,13 @@ export default {
     getLoginUser() {
       const userLogin = JSON.parse(sessionStorage.getItem("loginUser"))
       if (!userLogin) {
-        Message({
-          type: "error",
-          duration: 1500,
-          center: true,
-          message: "登录过期,请重新登录(>_<)!"
-        })
+          Message({
+            type: "error",
+            duration: 1500,
+            offset:5,
+            center: true,
+            message: "请重新登录(>_<)!"
+          })
       }
     }
   }
