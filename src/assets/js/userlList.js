@@ -7,7 +7,7 @@ export function userView(id) {
         params: {
             id: id
         }
-    }).then(r => console.log(r))
+    }).catch(r => console.log(r))
 }
 
 export function updateUser(id) {
@@ -16,7 +16,7 @@ export function updateUser(id) {
         params: {
             id:id
         }
-    }).then(r => console.log(r))
+    }).catch(r => console.log(r))
 }
 
 
@@ -25,5 +25,5 @@ export async function getUser(id) {
 }
 
 export function goUserList() {
-    router.replace('/u_list').then(r => console.log(r))
+    router.replace('/u_list').catch(r => console.log(r))
 }

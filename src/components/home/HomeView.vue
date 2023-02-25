@@ -61,16 +61,8 @@ export default {
         type: 'error'
       }).then(() => {
         request.get("/api/user/logout")
-        if (!router.currentRoute.path.includes(router.currentRoute.path)) {
-          this.$message({
-            type: 'error',
-            center: true,
-            message: '退出成功!',
-            duration: 2000
-          });
-        }
         sessionStorage.clear()
-        router.replace("/")
+        router.replace("/").catch(e=>{console.log(e)})
       }).catch(() => {
         this.$message({
           center: true,
@@ -86,7 +78,7 @@ export default {
       })
     },
     toFrame() {
-      router.push("/frame")
+      router.push("/frame").catch(e => console.log(e))
     }, getLoginUser() {
       let loginUser = sessionStorage.getItem("loginUser");
       loginUser = JSON.parse(loginUser)

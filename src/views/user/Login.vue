@@ -51,7 +51,7 @@ export default {
         const {data, description, code} = response
         if (code === 0) {
           sessionStorage.setItem("loginUser", JSON.stringify(data))
-          router.push("/frame")
+          router.push("/frame").catch(e => console.log(e))
         } else {
           Message({
             type: "error",
@@ -69,7 +69,7 @@ export default {
           type: "error",
           duration: 1500,
           center: true,
-          message: "请先登录(>_<)!"
+          message: "登录过期,请重新登录(>_<)!"
         })
       }
     }

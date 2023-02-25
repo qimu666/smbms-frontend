@@ -20,7 +20,7 @@ request.interceptors.request.use(
                     type: 'error',
                     center: true,
                     duration: 1500,
-                    message: "登录过期,请重新登录!"
+                    message: "登录过期,请重新登录(>_<)!"
                 })
                 router.replace("/").catch(e => console.log(e))
             }
@@ -42,14 +42,14 @@ request.interceptors.response.use(
                 Message({
                     showClose: true,
                     center: true,
-                    message: '请先登录 (>_<) !!',
+                    message: '登录过期,请重新登录(>_<)!',
                     duration: 1500,
                     type: 'error',
                 });
+                router.replace("/").catch(e => {
+                    console.log(e)
+                })
             }
-            router.replace("/").catch(e => {
-                console.log(e)
-            })
         }
         return response.data;
     },

@@ -7,7 +7,7 @@ export function billView(row) {
         params: {
             id: row.id
         }
-    }).then(r => console.log(r))
+    }).catch(r => console.log(r))
 }
 
 export function updateBill(row) {
@@ -16,7 +16,7 @@ export function updateBill(row) {
         params: {
             id: row.id
         }
-    }).then(r => console.log(r))
+    }).catch(r => console.log(r))
 }
 
 
@@ -25,5 +25,5 @@ export async function getBill(id) {
 }
 
 export function goBillList() {
-    router.replace('/b_list').then(r => console.log(r))
+    router.replace('/b_list').catch(r => console.log(r))
 }

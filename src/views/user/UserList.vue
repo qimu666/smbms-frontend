@@ -12,7 +12,7 @@
         <option value="0">--请选择--</option>
         <option v-for="item of roleList" :key="item.id" :value="item.id">{{ item.roleName }}</option>
       </select>
-      <router-link to="/u_add">添加订单</router-link>
+      <router-link to="/u_add">添加用户</router-link>
       <input value="查 询" type="submit" @click.prevent="getUserList" id="searchbutton">
     </div>
     <el-table
