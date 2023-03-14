@@ -6,7 +6,7 @@ module.exports = defineConfig({
     //     //代理
     //     proxy: {
     //         '/': {
-    //             target: ' http://localhost:8090',
+    //             target: 'http://localhost:8090',
     //             changeOrigin: true,
     //             pathRewrite: {
     //                 '/api': ''
